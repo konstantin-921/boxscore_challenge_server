@@ -1,6 +1,6 @@
 const express = require('express');
 const router = module.exports = express.Router();
-const { getMLB, getNBA } = require('../controllers/games');
+const { getCurrentData } = require('../controllers/games');
 
-router.get('/MLB', getMLB);
-router.get('/NBA', getNBA);
+router.get('/MLB', getCurrentData);
+router.get('/NBA', getCurrentData);

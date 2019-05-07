@@ -4,7 +4,7 @@ const cors = require('cors');
 const schedule = require('node-schedule');
 
 const redisClient = require('./redis-client');
-const { getDataMLB, getDataNBA } = require('./api');
+const { getData } = require('./api');
 
 const games = require('./routes/games');
 
@@ -13,8 +13,8 @@ app.use(games);
 
 schedule.scheduleJob('0-59/15 * * * * *', async () => {
   console.log('New query!');
-  const dataMLB = await getDataMLB();
-  const dataNBA = await getDataNBA();
+  const dataMLB = await getData('MLB');
+  const dataNBA = await getData('NBA');
   const date = Date.now();
   await redisClient.msetAsync('MLB', JSON.stringify(dataMLB.data), 'NBA', JSON.stringify(dataNBA.data), 'timestamp', JSON.stringify(date));
 });

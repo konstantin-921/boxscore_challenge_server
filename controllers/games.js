@@ -1,65 +1,33 @@
 const axios = require('axios');
 const redisClient = require('../redis-client');
-const { getDataMLB, getDataNBA } = require('../api');
+const { getData } = require('../api');
 
-const getDbMLB = async () => {
+const getDataFromDb = async (param) => {
   try {
-    return await redisClient.getAsync('MLB');
+    return await redisClient.getAsync(param);
   } catch (error) {
     console.error(error)
   }
 }
 
-const getDbNBA = async () => {
-  try {
-    return await redisClient.getAsync('NBA');
-  } catch (error) {
-    console.error(error)
-  }
-}
-
-const getDbDate = async () => {
-  try {
-    return await redisClient.getAsync('timestamp');
-  } catch (error) {
-    console.error(error)
-  }
-}
-
-const getMLB = async (req, res) => {
+const getCurrentData = async (req, res) => {
+  const { league } = req.query;
   const currentDate = Date.now();
-  const timestamp = await getDbDate();
+  const timestamp = await getDataFromDb('timestamp');
   const result = currentDate - timestamp;
+
 
   if(result > 15000) {
     console.log('--------------------');
     console.log('More than 15 seconds passed');
     console.log('--------------------');
-    const dataMLB = await getDataMLB();
-    await redisClient.setAsync('MLB', JSON.stringify(dataMLB.data));
+    const newData = await getData(league);
+    await redisClient.setAsync(league, JSON.stringify(newData.data));
   } 
 
-  const data = await getDbMLB();
+  const data = await getDataFromDb(league);
   
   return res.send(data);
 }
 
-const getNBA = async (req, res) => {
-  const currentDate = Date.now();
-  const timestamp = await getDbDate();
-  const result = currentDate - timestamp;
-
-  if(result > 15000) {
-    console.log('--------------------');
-    console.log('More than 15 seconds passed');
-    console.log('--------------------');
-    const dataNBA = await getDataNBA();
-    await redisClient.setAsync('NBA', JSON.stringify(dataNBA.data));
-  } 
-
-  const data = await getDbNBA();
-  
-  return res.send(data);
-}
-
-module.exports = { getMLB, getNBA }
+module.exports = { getCurrentData }
