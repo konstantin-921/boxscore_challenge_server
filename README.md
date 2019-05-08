@@ -11,6 +11,6 @@ It will then be started on port 4040.
 ## Fetching Data
 
 ```sh
-curl http://localhost:4040/MLB
-curl http://localhost:4040/NBA
+curl http://localhost:4040/api/games
+curl http://localhost:4040/api/games
 ```
