@@ -1,4 +1,3 @@
-const axios = require('axios');
 const redisClient = require('../redis-client');
 const { getData } = require('../api');
 

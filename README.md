@@ -4,13 +4,12 @@ Requirements: [Docker Community Edition](https://www.docker.com/community-editio
 
 To start the app run: `docker-compose up` or `sudo docker-compose up`
 
-It will then be started on port 4040
+It will then be started on port 4444
 
 # Endpoints
 
 ## Fetching Data
 
 ```sh
-curl http://localhost:4040/api/games
-curl http://localhost:4040/api/games
+curl http://localhost:4444/api/games
 ```

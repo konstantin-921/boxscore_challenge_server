@@ -10,11 +10,11 @@ app:
   links:
     - redis
   ports:
-    - 4040:4040
+    - 4444:4444
   environment:
     - REDIS_URL=redis://cache
     - NODE_ENV=development
-    - PORT=4040
+    - PORT=4444
   command:
     sh -c 'npm i && node server.js'
 
