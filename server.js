@@ -6,6 +6,8 @@ const cors = require('cors')
 const schedule = require('node-schedule')
 const redisClient = require('./redis-client')
 const { getData } = require('./api')
+const { getDataFromDb } = require('./db_api/getDataFromDb')
+
 const games = require('./routes/games')
 
 const server = http.createServer(app);
@@ -21,7 +23,12 @@ io.on("connection", socket => {
 
   schedule.scheduleJob('0-59/15 * * * * *', async () => {
     try {
-      socket.emit('news', { hello: 'world' });
+      socket.emit('MLB', { 
+        data: await getDataFromDb('MLB')
+      })
+      socket.emit('NBA', { 
+        data: await getDataFromDb('NBA')
+      })
     } catch(error) {
       console.log(error)
     }
