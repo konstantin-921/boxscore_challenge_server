@@ -7,7 +7,7 @@ const URLS = {
 
 const getData = async (league) => {
   try {
-    return await axios.get(URLS[league])
+    return await axios.get(URLS[league], { headers: {'Content-Type': 'application/json' }})
   } catch (error) {
     throw new Error(error);
   }

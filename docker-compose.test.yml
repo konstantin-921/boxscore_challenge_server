@@ -11,9 +11,10 @@ app:
     - redis
   ports:
     - 4444:4444
+  tty: true
   environment:
     - REDIS_URL=redis://cache
-    - NODE_ENV=development
+    - NODE_ENV=test
     - PORT=4444
   command:
-    sh -c 'npm i && node server.js'
+    sh -c 'npm i && npm run docker-mocha'

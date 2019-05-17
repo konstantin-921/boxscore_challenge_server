@@ -18,7 +18,6 @@ const getCurrentData = async (req, res, next) => {
     }
 
     const data = await getDataFromDb(league)
-    
     res.send(data)
   } catch(error) {
     next(error)

@@ -10,13 +10,13 @@ const { getDataFromDb } = require('./db_api/getDataFromDb')
 
 const games = require('./routes/games')
 
-const server = http.createServer(app);
-const PORT = process.env.PORT || 4444;
+const server = http.createServer(app)
+const PORT = process.env.PORT || 4444
 
-app.use(cors());
-app.use(games);
+app.use(cors())
+app.use(games)
 
-const io = socketIO(server);
+const io = socketIO(server)
 
 io.on("connection", socket => {
   console.log("New client connected" + socket.id)
@@ -35,7 +35,7 @@ io.on("connection", socket => {
   });
 
   socket.on("disconnect", () => {
-    console.log("user disconnected");
+    console.log("user disconnected")
   });
 });
 
@@ -53,7 +53,7 @@ schedule.scheduleJob('0-59/15 * * * * *', async () => {
 
 
 app.use(function (error, req, res, next) {
-  res.status(error.status || 500);
+  res.status(error.status || 500)
   res.json({
     error: {
       message: error.message
@@ -63,4 +63,6 @@ app.use(function (error, req, res, next) {
 
 server.listen(PORT, () => {
   console.log(`Server listening on port ${PORT}`)
-});
+})
+
+module.exports = { server, redisClient }
