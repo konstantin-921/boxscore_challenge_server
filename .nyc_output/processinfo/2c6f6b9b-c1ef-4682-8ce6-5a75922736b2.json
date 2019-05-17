@@ -1,1 +1,0 @@
-{"uuid":"2c6f6b9b-c1ef-4682-8ce6-5a75922736b2","parent":null,"pid":34,"argv":["/usr/local/bin/node","/var/www/app/node_modules/.bin/mocha","test/","--exit"],"execArgv":[],"cwd":"/var/www/app","time":1558104284358,"ppid":28,"root":"ac8b6f0b-691e-4fa7-b8e3-785da321d798","coverageFilename":"/var/www/app/.nyc_output/2c6f6b9b-c1ef-4682-8ce6-5a75922736b2.json","files":[]}
